@@ -1,0 +1,90 @@
+<div class="body">
+  <div class="flex justify-center content-center pt-20 titulo">
+    <img src="../../../assets/login/logo_login.svg" alt="Logo do Acelera" />
+  </div>
+
+  <form [formGroup]="loginForm" class="flex md:justify-center md:content-center ml-10 usuarioSenha" (ngSubmit)="onLogin()">
+    <div class="flex-col justify-center content-center items-center flex-wrap formLogin">
+      <div class="mt-28 flex usuario">
+        <span class="material-symbols-outlined" style="color: rgba(245, 245, 245, 1);">person</span>
+        <label class="text-white ml-1 labelUsuario">USUÁRIO</label>           
+      </div>
+      <div class="flex input-wrapper">
+        <input formControlName="username" id="inputUsuario" class="mt-2 mr-3" type="email" required placeholder="Usuário" name="emailLogin">
+      </div>
+      <small *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')" class="text-warning">*Login obrigatório!</small>
+      <div class="flex mt-12 senha">
+        <span class="material-symbols-outlined" style="color: rgba(245, 245, 245, 1);">lock</span>
+        <label class="text-white ml-1 labelSenha">SENHA</label>
+      </div>
+      <div class="flex input-wrapper">
+        <input formControlName="password" id="inputSenha" class="grow shrink mt-2 mr-3" [type]="type" required placeholder="Senha" name="senhaLogin">
+        <button type="button" (click)="togglePasswordVisibility()" class="material-symbols-outlined">{{isText ? 'visibility_off' : 'visibility'}}</button>
+      </div>
+      <small *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')" class="text-warning">*Senha obrigatória!</small>
+      <div class="esqueceuSenha flex justify-end mr-10 mt-1">
+        <a data-bs-toggle="modal" data-bs-target="#modalEsqueceuSenha">Esqueci minha senha</a>
+      </div> 
+      <div class="flex justify-center content-center items-center py-3 px-28 mt-16 fazerLogin mb-4">
+        <button type="submit">ACESSAR</button>    
+      </div>  
+    </div>
+  </form>
+</div>
+
+  
+<!-- Modal Acessar - Código de verificação -->
+<div class="modal fade" id="modalAcessarCodVerificacao" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header flex justify-center content-center items-center">
+              <h5 class="modal-title fw-bold mt-1" id="TituloModalCentralizado">Verificação de acesso</h5>
+          </div>
+          <div class="modal-body mt-6">
+              Insira o código de 6 dígitos do autenticador ***
+              <form [formGroup]="verifyCodeForm" (ngSubmit)="onVerifyCode()">
+                  <input formControlName="code" type="text" class="form-control mt-6" id="recipient-cod" placeholder="0-0-0-0-0-0" maxlength="6" (input)="onCodeInput($event)">
+                  <div class="footerProximoAcesso py-1 mx-4 my-4 w-96">
+                      <button type="submit" class="btn">ACESSAR</button>
+                  </div>
+              </form>
+          </div>
+          <div class="footerCancelarAcesso">  
+              <a type="button" class="btn" data-bs-dismiss="modal">Cancelar</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+  
+<!-- Modal Esqueci Minha Senha -->
+<div class="modal fade" id="modalEsqueceuSenha" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header flex justify-center content-center items-center">
+        <h5 class="modal-title fw-bold mt-1" id="TituloModalCentralizado">Esqueci minha senha</h5>
+      </div>
+      <div class="modal-body mt-6">
+        Para redefinir sua senha, informe o e-mail cadastrado na plataforma e lhe enviaremos um código de verificação.
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPassword()">
+          <div class="form-group flex mt-6 inputEmailEsqueciSenha">
+            <label for="recipient-email" class="flex justify-start col-form-label">
+              <span class="material-symbols-outlined mr-1" style="color: rgba(0, 60, 68, 1);">mail</span>
+              E-mail
+            </label>
+            <input formControlName="email" type="email" class="form-control" id="recipient-email" required>
+          </div>
+          <div class="modal-footer flex-col">
+            <div class="footerProximoEsqueciSenha py-1 mx-4 w-96">
+              <button type="submit" class="btn">PRÓXIMO</button>
+            </div>
+            <div class="footerCancelarEsqueciSenha">
+              <a type="button" class="btn" data-bs-dismiss="modal">Cancelar</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

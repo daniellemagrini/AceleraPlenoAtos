@@ -1,0 +1,192 @@
+.navbarTitulo {
+    background-color: var(--color-secundaria);
+}
+
+.navbarTitulo h3 {
+    color: var(--color-branca);
+    font-weight: 700;
+}
+
+.dadosUsuario {
+    position: relative;
+}
+
+form {
+    position: relative;
+}
+
+.dadosUsuario h2 {
+    color: var(--color-principal);
+    font-weight: 700;
+}
+
+.dadosUsuario label {
+    color: rgba(25, 25, 25, 1);
+    font-weight: 400;
+    margin-right: .5rem;
+}
+
+.dadosUsuario input, .dadosUsuario select {
+    border: 1px solid var(--color-btndisabled);
+    border-radius: .5rem;
+    background-color: rgba(255, 255, 255);
+    margin: 0.2rem 1rem .5rem 0;
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+    width: 1.2rem;
+    height:  1.2rem;
+}
+  
+input[type="checkbox"]:checked {
+    background-color: var(--color-secundaria);
+    border-color: rgb(47, 169, 155);
+}
+
+.unidade {
+    max-height: 5rem;
+    overflow-y: auto; 
+}
+
+.btProximo, .btVoltar, .btInativar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.bt-inat {
+    background-color: var(--color-inativo);
+}
+
+.btn-next, .bt-inat {
+    color: var(--color-branca);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-next {
+    background-color: var(--color-principal);
+}
+
+.btn-next:hover {
+    background-color: rgba(0, 42, 48);
+}
+
+.bt-inat:hover {
+    background-color: rgba(108, 29, 37);
+}
+
+.btn-next:focus {
+    outline: none;
+}
+
+.bt-inat:focus {
+    outline: none;
+}
+
+.body {
+    background-color: var(--color-principal);
+}
+
+.tituloMenu {
+    color: var(--color-branca);
+    font-weight: 400;
+}
+
+.main-container {
+    transition: transform 0.3s ease;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.navbar {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1000;
+    display: none;
+}
+
+.move-right {
+    transform: translateX(16rem);
+}
+
+.main-container.move-right {
+    transform: translateX(16rem);
+    transition: transform 0.3s ease;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100%;
+    background: var(--color-principal);
+    transform: translateX(-16rem);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-overlay.show {
+    transform: translateX(0);
+}
+
+.icon-cadastro,
+.icon-consulta {
+    cursor: pointer;
+}
+
+.marcaInativa {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: rotate(-45deg);
+    font-size: 10rem;
+    color: rgba(255, 0, 0, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+select[disabled], input[disabled] {
+    background-color: var(--color-btndisabled);
+    color: var(--color-btndisabled);
+    cursor: not-allowed;
+}
+
+input[type="checkbox"][disabled] + label {
+    color: var(--color-btndisabled);
+    cursor: not-allowed;
+}
+
+.iconeT {
+    display: none;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .navbar{
+        display: block;
+    }
+
+    .iconeT{
+        display: block;
+    }
+
+    .flecha{
+        display: none;
+    }
+
+    .geral {
+        justify-content: center;
+    }
+}

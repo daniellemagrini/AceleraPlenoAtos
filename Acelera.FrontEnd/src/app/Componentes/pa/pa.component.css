@@ -1,0 +1,110 @@
+.navbar {
+    display: none;
+}
+
+.navbarTitulo {
+    background-color: var(--color-secundaria);
+}
+
+.navbarTitulo h3 {
+    color:  var(--color-branca);
+    font-weight: 700;
+}
+
+.main-container {
+    transition: transform 0.3s ease;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.navbar {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1000;
+}
+
+.move-right {
+    transform: translateX(16rem);
+}
+
+.main-container.move-right {
+    transform: translateX(16rem);
+    transition: transform 0.3s ease;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100%;
+    background: var(--color-principal);
+    transform: translateX(-16rem);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-overlay.show {
+    transform: translateX(0);
+}
+
+.atmUser {
+    background-color: var(--color-principal);
+    color:  var(--color-branca);
+    border-radius: .5rem;
+    border: 2px solid var(--color-principal);
+    margin-bottom: 1rem;
+}
+
+.grafico-container {
+    background-color:  var(--color-branca);
+    color: var(--color-principal);
+    border-radius: .5rem;
+    border: 2px solid  var(--color-branca);
+}
+
+.terminalLabel, .terminalLabelTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.btn-filtrarGrafico, .btn-exportarGrafico {
+    background-color: var(--color-secundaria);
+    color:  var(--color-branca);
+    border-radius: .5rem;
+    border: 2px solid var(--color-secundaria);
+    font-weight: 700;
+}
+
+#dataInicio, #dataFim {
+    border: 1px solid var(--color-disabled);
+    border-radius: .5rem;
+    background-color:  var(--color-branca);
+    margin: 0.2rem 1rem .5rem 0;
+}
+
+.iconeT {
+    display: none;
+}
+
+@media only screen and (min-width: 992px) {
+    .navbar {
+        display: block;
+    }
+
+    .iconeT{
+        display: block;
+    }
+
+    .flecha{
+        display: none;
+    }
+
+    .geral {
+        justify-content: center;
+    }
+
+    .atmUserContent {
+        flex-direction: row;
+    }
+}

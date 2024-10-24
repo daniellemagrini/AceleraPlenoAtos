@@ -1,0 +1,65 @@
+<app-menu-hamburguer class="navbar"></app-menu-hamburguer>
+
+<div class="main-container" [ngClass]="{'move-right': menuOpen}">
+  <div class="navbarTitulo">
+    <div class="w-full h-10 flex content-center items-center mx-6 geral">
+      <svg class="iconeT" xmlns="http://www.w3.org/2000/svg" width="27" height="18" viewBox="0 0 40 40" fill="none">
+        <path d="M8.88889 31.1111H13.3333V20H8.88889V31.1111ZM26.6667 31.1111H31.1111V8.88889H26.6667V31.1111ZM17.7778 31.1111H22.2222V24.4444H17.7778V31.1111ZM17.7778 20H22.2222V15.5556H17.7778V20ZM4.44444 40C3.22222 40 2.17593 39.5648 1.30556 38.6944C0.435185 37.8241 0 36.7778 0 35.5556V4.44444C0 3.22222 0.435185 2.17593 1.30556 1.30556C2.17593 0.435185 3.22222 0 4.44444 0H35.5556C36.7778 0 37.8241 0.435185 38.6944 1.30556C39.5648 2.17593 40 3.22222 40 4.44444V35.5556C40 36.7778 39.5648 37.8241 38.6944 38.6944C37.8241 39.5648 36.7778 40 35.5556 40H4.44444ZM4.44444 35.5556H35.5556V4.44444H4.44444V35.5556Z" fill="white"/>
+      </svg>
+      <a href="/home" class="cursor-pointer"><svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M16 22L6 12L16 2L17.775 3.775L9.55 12L17.775 20.225L16 22Z" fill="white"/>
+      </svg></a>
+      <h3 class="pl-3">Parametrização</h3>
+    </div>
+  </div>
+
+  <!-- Icones -->
+  <div class="icons flex flex-col flex-wrap justify-center content-center items-center">
+    <!--Editar Parametros-->
+    <div class="iconeEditar flex mt-6 ml-4 py-3 px-2.5" [ngClass]="{'cursor-not-allowed': indexExpandido === null || isInativo}">
+      <div class="icon-container">
+        <img [src]="currentImgEditUser" alt="Ícone de Editar" class="icon-edit" 
+        (click)="isInativo ? null : enableEdit($event)"
+        [class.cursor-pointer]="indexExpandido !== null && !isInativo"
+        [class.cursor-not-allowed]="indexExpandido === null || isInativo"
+        (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+      </div>
+    </div>
+
+    <div class="processos-container flex flex-col justify-center content-center items-center gap-2 mx-8 mt-6 w-7/12">
+      <div *ngFor="let param of parametrizacoes; let i = index" (click)="cliqueProcessos($event, i)" class="processos flex flex-col justify-between pr-4 w-full cursor-pointer">
+        <div class="flex justify-between">
+          <h6 class="my-2 ml-4">{{ param.tipocarga }}</h6>
+          <a class="mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M22 8L12 18L2 8L3.775 6.225L12 14.45L20.225 6.225L22 8Z" fill="white"/>
+            </svg>
+          </a>
+        </div>
+        <div *ngIf="indexExpandido === i" class="processoExpandido flex flex-col ml-4 p-2 mb-3 rounded relative" (click)="$event.stopPropagation()">
+          <label class="m-2" for="caminho{{i}}">Caminho do Arquivo:</label>
+          <input id="caminho{{i}}" type="text" class="w-11/12 p-2 mx-2 border border-gray-300 rounded caminho" [(ngModel)]="param.caminhocarga" [disabled]="!isEdit">         
+          <label for="intervalo{{i}}" class="mx-2 mt-4 mb-2">Intervalo de Execução:</label>
+          <select id="intervalo{{i}}" class="w-11/12 p-2 mx-2 mb-4 border border-gray-300 rounded intervalo" [(ngModel)]="param.intervaloexecucao" [disabled]="!isEdit">
+            <option *ngFor="let h of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]" [value]="h">{{ h }} horas</option>
+          </select>
+           <!-- Marca d'água "INATIVO" -->
+           <div *ngIf="isInativo" class="marcaInativa absolute inset-0 flex items-center justify-center">
+            INATIVO
+          </div> 
+          <div class="flex justify-center gap-3">
+            <div class="flex justify-center content-center items-center py-3 btSalvar">
+              <button type="button" class="btn-next" [disabled]="!isEdit || isInativo" [ngClass]="{'btn-disabled': !isEdit || isInativo}" (click)="salvarAlteracoes()">SALVAR</button>
+            </div>  
+            <div class="flex justify-center content-center items-center py-3 btVoltar">
+              <button type="button" class="btn-next" [disabled]="!isEdit || isInativo" [ngClass]="{'btn-disabled': !isEdit || isInativo}" (click)="voltar()">VOLTAR</button>
+            </div>
+            <div class="flex justify-center content-center items-center py-3 btInativar">
+              <button type="button" class="btn-inat" [disabled]="!isEdit || isInativo" [ngClass]="{'btn-disabled': !isEdit || isInativo}" (click)="inativarParametrizacao()">INATIVAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

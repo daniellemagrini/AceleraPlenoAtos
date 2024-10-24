@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Acelera.API.AuthOriginal.props" />
+</Project>

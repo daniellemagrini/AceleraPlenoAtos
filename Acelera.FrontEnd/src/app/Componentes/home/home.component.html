@@ -1,0 +1,49 @@
+<app-navbar [perfis]="perfis"></app-navbar>
+<div class="body mt-8 md:mt-24">
+
+    <div class="head">
+        <div class="flex justify-center items-center content-center titulo">
+            <img src="../../../assets/home/logo_acelera_home.svg" alt="Logo do Acelera" />
+        </div>
+        <div class="flex justify-center items-center content-center gap-4 mt-8 md:mt-14 unidades">
+            <label for="drpUnidade">Unidade</label>
+            <select name="unidade" id="drpUnidade" class="w-2/3 rounded-lg drpUnidadeBox" [(ngModel)]="unidade">
+              <option class="opUnidade" [value]="unidade">{{ unidade }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex-col justify-between items-center content-center mt-12 md:mt-28 ml-8 md:ml-24 lg:ml-44 menu">
+        <div class="flex justify-start items-center content-center menuUsuario">
+            <h3 class="font-semibold">Olá, {{ username }}!</h3>
+        </div>
+        <div class="mt-2 text-sm menuTexto">
+            <p>Selecione uma opção abaixo para continuar</p>
+        </div>
+        <div class="flex flex-wrap mb-10 iconesMenu">
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconePA">
+                <a><img class="imgIconPA" src="../../../assets/home/pontos_de_atendimento.svg" alt="Ícone de Pontos de atendimento" /></a>
+                <a href="pa"><img class="imgIconPAHover" src="../../../assets/home/pontos_de_atendimento_hover.svg" alt="Ícone de Pontos de atendimento ao passar o mouse" /></a>
+            </div>
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconeTransacoes disabled-link">
+                <a><img class="imgIconTransacoes" src="../../../assets/home/transacoes.svg" alt="Ícone de Transações" /></a>
+                <a href="transacoes"><img class="imgIconTransacoesHover" src="../../../assets/home/transacoes_hover.svg" alt="Ícone de Transações ao passar o mouse" /></a>
+            </div>
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconeTransp disabled-link">
+                <a><img class="imgIconTransp" src="../../../assets/home/transportadoras.svg" alt="Ícone de Transportadoras" /></a>
+                <a href="transportadoras"><img class="imgIconTranspHover" src="../../../assets/home/transportadoras_hover.svg" alt="Ícone de Transportadoras ao passar o mouse" /></a>
+            </div>
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconeParam" [ngClass]="{'disabled-link': !hasAccess(['Administrador', 'TI'])}">
+                <a><img class="imgIconParam" src="../../../assets/home/parametrizacoes.svg" alt="Ícone de Parametrizações" /></a>
+                <a [href]="hasAccess(['Administrador', 'TI']) ? 'parametrizacao' : null"><img class="imgIconParamHover" src="../../../assets/home/parametrizacoes_hover.svg" alt="Ícone de Parametrizações ao passar o mouse" /></a>
+            </div>
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconeUsers" [ngClass]="{'disabled-link': !hasAccess(['Administrador', 'TI'])}">
+                <a><img class="imgIconUsers" src="../../../assets/home/usuarios.svg" alt="Ícone de Usuários" /></a>
+                <a [href]="hasAccess(['Administrador', 'TI']) ? 'usuario' : null"><img class="imgIconUsersHover" src="../../../assets/home/usuarios_hover.svg" alt="Ícone de Usuários ao passar o mouse" /></a>
+            </div>
+            <div class="mr-4 md:mr-10 lg:mr-20 mt-6 iconeLog" [ngClass]="{'disabled-link': !hasAccess(['Administrador', 'TI'])}">
+                <a><img class="imgIconLog" src="../../../assets/home/log.svg" alt="Ícone de Consulta de Logs" /></a>
+                <a [href]="hasAccess(['Administrador', 'TI']) ? 'log' : null"><img class="imgIconLogHover" src="../../../assets/home/log_hover.svg" alt="Ícone de Consulta de Logs ao passar o mouse" /></a>
+            </div>
+        </div>
+    </div>       
+</div>

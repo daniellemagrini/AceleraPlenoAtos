@@ -1,0 +1,6 @@
+@ConsultaNumerarios_HostAddress = http://localhost:5231
+
+GET {{ConsultaNumerarios_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,56 @@
+<app-menu-hamburguer class="navbar"></app-menu-hamburguer>
+
+<div class="main-container" [ngClass]="{'move-right': menuOpen}">
+  <div class="navbarTitulo">
+    <div class="w-full h-10 flex justify-center content-center items-center mx-6 geral">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M3.33301 31.6667V28.3333H19.9997V31.6667H3.33301ZM3.33301 23.3333V20H11.6663V23.3333H3.33301ZM3.33301 15V11.6667H11.6663V15H3.33301ZM34.333 31.6667L27.9163 25.25C27.2497 25.7222 26.5205 26.0764 25.7288 26.3125C24.9372 26.5486 24.1386 26.6667 23.333 26.6667C21.0275 26.6667 19.0622 25.8542 17.4372 24.2292C15.8122 22.6042 14.9997 20.6389 14.9997 18.3333C14.9997 16.0278 15.8122 14.0625 17.4372 12.4375C19.0622 10.8125 21.0275 10 23.333 10C25.6386 10 27.6038 10.8125 29.2288 12.4375C30.8538 14.0625 31.6663 16.0278 31.6663 18.3333C31.6663 19.1389 31.5483 19.9375 31.3122 20.7292C31.0761 21.5208 30.7219 22.25 30.2497 22.9167L36.6663 29.3333L34.333 31.6667ZM23.333 23.3333C24.7219 23.3333 25.9025 22.8472 26.8747 21.875C27.8469 20.9028 28.333 19.7222 28.333 18.3333C28.333 16.9444 27.8469 15.7639 26.8747 14.7917C25.9025 13.8194 24.7219 13.3333 23.333 13.3333C21.9441 13.3333 20.7636 13.8194 19.7913 14.7917C18.8191 15.7639 18.333 16.9444 18.333 18.3333C18.333 19.7222 18.8191 20.9028 19.7913 21.875C20.7636 22.8472 21.9441 23.3333 23.333 23.3333Z" fill="white"/>
+        </svg>
+      <h3 class="pl-3">Consulta de log</h3>
+    </div>
+  </div>
+
+  <!-- Icones -->
+  <div class="icons flex flex-col flex-wrap justify-center content-center items-center">
+    <!--Editar Parametros-->
+    <div class="iconeFiltrar flex mt-6 ml-4 py-3 px-2.5" (click)="toggleFilters()">
+      <div class="icon-container">
+        <img src="../../../assets/log-processamento/filtrar.svg" alt="Ícone de Filtrar" class="icon-filter">
+      </div>
+    </div>
+
+      <!-- Campos de filtro -->
+      <div *ngIf="showFilters" class="filter-container flex justify-between gap-4">
+        <div class="status my-5">
+          <label class="m-4 filterLabel" for="statusFilter">Filtrar por Status:</label>
+          <select id="statusFilter" [(ngModel)]="statusFilter" (ngModelChange)="aplicarFiltro()">
+            <option value="">Todos</option>
+            <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <div class="data my-5">        
+          <label class="m-4 filterLabel" for="dateFilter">Filtrar por Data:</label>
+          <input id="dateFilter" type="date" [(ngModel)]="dateFilter" (ngModelChange)="aplicarFiltro()">
+        </div>
+      </div>
+
+    <div class="table table-hover">
+      <div class="table-header">
+          <div class="table-cell">ID</div>
+          <div class="table-cell">Mensagem</div>
+          <div class="table-cell">Status</div>
+          <div class="table-cell">Data/Hora</div>
+      </div>
+      <div *ngFor="let log of filtroLogs" class="table-row">
+        <div class="table-cell">{{ log.idlog }}</div>
+        <div class="table-cell">{{ log.desclog }}</div>
+        <div class="table-cell">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="15" cy="15" r="15" [attr.fill]="corStatus(log.status)"/>
+          </svg>
+          {{ log.status }}
+        </div>
+        <div class="table-cell">{{ log.datahoralog | date:'dd/MM/yyyy HH:mm:ss' }}</div>
+    </div>
+  </div>
+</div>

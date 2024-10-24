@@ -1,0 +1,192 @@
+.navbar {
+    display: none;
+}
+
+.navbarTitulo {
+    background-color: var(--color-secundaria);
+}
+
+.navbarTitulo h3 {
+    color:  var(--color-branca);
+    font-weight: 700;
+}
+
+.main-container {
+    transition: transform 0.3s ease;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.navbar {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1000;
+}
+
+.move-right {
+    transform: translateX(16rem);
+}
+
+.main-container.move-right {
+    transform: translateX(16rem);
+    transition: transform 0.3s ease;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100%;
+    background: var(--color-principal);
+    transform: translateX(-16rem);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-overlay.show {
+    transform: translateX(0);
+}
+
+.imgIconEditUserMob, .imgIconEditUserMobHover, .imgIconEditUser, .imgIconEditUserHover {
+    cursor: pointer;
+}
+
+.imgIconEditUserMobHover, .imgIconEditUser, .imgIconEditUserHover {
+    display: none;
+}
+
+.iconeEditar:hover .imgIconEditUserMob {
+    display: none;
+}
+
+.iconeEditar:hover .imgIconEditUserMobHover {
+    display: block;
+    transform: scale(1);
+}
+
+.processos {
+    border: 2px solid var(--color-principal);
+    background-color: var(--color-principal);
+    border-radius: .5rem;
+    color:  var(--color-branca);
+    font-size: .8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.processoExpandido {
+    background-color:  var(--color-branca);
+    color: var(--color-principal)
+}
+
+.caminho, .intervalo {
+    color: rgba(25, 25, 25, 1);
+    font-weight: 400;
+}
+
+input:disabled, select:disabled {
+    background-color:  var(--color-branca);
+    cursor: not-allowed;
+}
+  
+input:disabled::placeholder, select:disabled::placeholder {
+    color: var(--color-btndisabled);
+}
+
+.icon-edit {
+    cursor: pointer;
+}
+
+.btn-inat {
+    background-color: var(--color-inativo);
+}
+
+.btn-next, .btn-inat {
+    color:  var(--color-branca);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-next {
+    background-color: var(--color-principal);
+}
+
+.btn-next:hover {
+    background-color: rgba(0, 42, 48);
+}
+
+.btn-inat:hover {
+    background-color: rgba(108, 29, 37);
+}
+
+.btn-next:focus, .btn-inat:focus {
+    outline: none;
+}
+
+.btn-disabled {
+    background-color: var(--color-disabled);
+    color: rgba(128, 128, 128);
+    cursor: not-allowed; 
+    border: 1px solid var(--color-disabled);
+}
+
+.marcaInativa {
+    position: absolute;
+    transform: rotate(-45deg);
+    font-size: 3.5rem;
+    color: rgba(255, 0, 0, 0.5);
+    z-index: 10;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.iconeT {
+    display: none;
+}
+
+@media only screen and (min-width: 992px) {
+    .navbar {
+        display: block;
+    }
+
+    .iconeT{
+        display: block;
+    }
+
+    .flecha{
+        display: none;
+    }
+
+    .geral {
+        justify-content: center;
+    }
+
+    .imgIconEditUser {
+        display: block;
+    }
+
+    .imgIconEditUserMob, .imgIconEditUserMobHover, .imgIconEditUserHover {
+        display: none;
+    }
+
+    .iconeEditar:hover .imgIconEditUser {
+        display: none;
+    }
+
+    .iconeEditar:hover .imgIconEditUserMobHover {
+        display: none;
+    }
+    
+    .iconeEditar:hover .imgIconEditUserHover {
+        display: block;
+        transform: scale(1);
+    }
+}

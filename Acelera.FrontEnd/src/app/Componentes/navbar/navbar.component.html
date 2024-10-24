@@ -1,0 +1,11 @@
+<nav class="navbar">
+    <div class="w-full h-16 flex justify-between content-center items-center mx-6 geral">
+        <h3>O(s) perfil(s) do seu acesso é: {{ perfis.join(' / ') }}</h3>
+        <div class="relative">
+            <a (click)="toggleMenu()" class="account"><span class="text-3xl md:text-4xl lg:text-5xl material-symbols-outlined">account_circle</span></a>
+            <div class="dropdown-menu" [ngClass]="{'show': menuOpen}">
+                <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>

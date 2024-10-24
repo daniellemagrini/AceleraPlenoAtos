@@ -1,0 +1,54 @@
+.body {
+    background-color: var(--color-principal);
+}
+
+.tituloMenu {
+    color: var(--color-branca);
+    font-weight: 400;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100%;
+    background-color: var(--color-principal);
+    display: none;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
+
+.menu-overlay.show {
+    display: block;
+    transform: translateX(0);
+}
+
+.main-container {
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+    transition: transform 0.3s ease;
+}
+  
+  .navbar {
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1000; 
+  }
+  
+  .move-right {
+    transform: translateX(16rem);
+  }
+
+  .disabled {
+    pointer-events: none; 
+    opacity: 0.5; 
+  }

@@ -1,0 +1,48 @@
+<div class="body">
+  <div class="flex justify-center content-center pt-20 titulo">
+    <img src="../../../assets/login/logo_login.svg" alt="Logo do Acelera" />
+  </div>
+
+  <form [formGroup]="loginForm" class="flex md:justify-center md:content-center ml-10 usuarioSenha" (ngSubmit)="onLogin()">
+    <div class="flex-col justify-center content-center items-center flex-wrap formLogin">
+      <div class="mt-28 flex usuario">
+        <span class="material-symbols-outlined" style="color: rgba(245, 245, 245, 1);">person</span>
+        <label class="text-white ml-1 labelUsuario">USUÁRIO</label>           
+      </div>
+      <div class="flex input-wrapper">
+        <input formControlName="username" id="inputUsuario" class="mt-2 mr-3" type="email" required placeholder="Usuário" name="emailLogin" readonly>
+      </div>
+      <small *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')" class="text-warning">*Login obrigatório!</small>
+
+      <div class="flex mt-12 senha">
+        <span class="material-symbols-outlined" style="color: rgba(245, 245, 245, 1);">lock</span>
+        <label class="text-white ml-1 labelSenha">SENHA</label>
+      </div>
+      <div class="flex input-wrapper">
+        <input formControlName="password" id="inputSenha" class="grow shrink mt-2 mr-3"
+         [type]="type" required placeholder="Senha" name="senhaLogin"
+         onpaste="return false" oncopy="return false" oncut="return false">
+        <button type="button" (click)="togglePasswordVisibility()" id="eyeIconOff" class="material-symbols-outlined visibility_off hide">visibility_off</button>
+        <button type="button" (click)="togglePasswordVisibility()" id="eyeIconOn" class="material-symbols-outlined visibility">visibility</button>
+      </div>
+
+      <div class="flex mt-12 confirmaSenha">
+        <span class="material-symbols-outlined" style="color: rgba(245, 245, 245, 1);">lock</span>
+        <label class="text-white ml-1 labelConfirmarSenha">CONFIRMAR SENHA</label>
+      </div>
+      <div class="flex input-wrapper">
+        <input formControlName="confirmPassword" id="inputConfirmaSenha" class="grow shrink mt-2 mr-3"
+         [type]="type" required placeholder="Confirmar Senha" name="confirmarSenhaLogin"
+         onpaste="return false" oncopy="return false" oncut="return false">
+        <button type="button" (click)="togglePasswordVisibility()" id="eyeIconOffCS" class="material-symbols-outlined visibility_off hide">visibility_off</button>
+        <button type="button" (click)="togglePasswordVisibility()" id="eyeIconOnCS" class="material-symbols-outlined visibility">visibility</button>
+      </div>
+      <small *ngIf="loginForm.get('confirmPassword')?.touched && loginForm.get('confirmPassword')?.hasError('required')" class="text-warning">*Confirmação de Senha obrigatória!</small>
+      <small *ngIf="loginForm.hasError('mismatch')" class="text-warning">*Senhas não coincidem!</small>
+
+      <div class="flex justify-center content-center items-center py-3 px-28 mt-16 criarUsuario mb-4">
+        <button type="submit">CRIAR</button>    
+      </div>  
+    </div>
+  </form>
+</div>

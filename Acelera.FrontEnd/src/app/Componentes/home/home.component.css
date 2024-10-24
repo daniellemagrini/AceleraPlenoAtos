@@ -1,0 +1,43 @@
+.titulo img {
+    width: 100%;
+    max-width: 18rem;
+    height: auto;
+}
+
+#drpUnidade {
+    border: 1px solid var(--color-disabled);
+    appearance: none;
+}
+
+.imgIconPAHover, .imgIconTransacoesHover, .imgIconTranspHover, .imgIconParamHover, .imgIconUsersHover, .imgIconLogHover {
+    display: none;
+}
+
+.iconePA:hover .imgIconPA, .iconeTransacoes:hover .imgIconTransacoes, .iconeTransp:hover .imgIconTransp,
+.iconeParam:hover .imgIconParam, .iconeUsers:hover .imgIconUsers, .iconeLog:hover .imgIconLog {
+    display: none;
+}
+
+.iconePA:hover .imgIconPAHover, .iconeTransacoes:hover .imgIconTransacoesHover, .iconeTransp:hover .imgIconTranspHover,
+.iconeParam:hover .imgIconParamHover, .iconeUsers:hover .imgIconUsersHover, .iconeLog:hover .imgIconLogHover {
+    display: block;
+    transform: scale(1.2);
+}
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+  
+.disabled-link img {
+    filter: grayscale(100%);
+}
+  
+.disabled-link a {
+    pointer-events: none;
+}
+  
+.disabled-link a:hover {
+    opacity: 0.5;
+}

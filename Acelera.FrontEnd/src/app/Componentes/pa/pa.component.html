@@ -1,0 +1,103 @@
+<app-menu-hamburguer class="navbar"></app-menu-hamburguer>
+
+<div class="main-container" [ngClass]="{'move-right': menuOpen}">
+  <div class="navbarTitulo">
+    <div class="w-full h-10 flex content-center items-center mx-6 geral">
+      <svg class="iconeT" xmlns="http://www.w3.org/2000/svg" width="41" height="36" viewBox="0 0 41 36" fill="none">
+        <path d="M2.72222 4.66667V0.222229H38.2778V4.66667H2.72222ZM2.72222 35.7778V22.4445H0.5V18L2.72222 6.8889H38.2778L40.5 18V22.4445H38.2778V35.7778H33.8333V22.4445H24.9444V35.7778H2.72222ZM7.16667 31.3333H20.5V22.4445H7.16667V31.3333ZM5.05556 18H35.9444L34.6111 11.3333H6.38889L5.05556 18Z" fill="#F5F5F5"/>
+      </svg>
+      <a href="/home" class="cursor-pointer"><svg class="flecha" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M16 22L6 12L16 2L17.775 3.775L9.55 12L17.775 20.225L16 22Z" fill="white"/>
+      </svg></a>
+      <h3 class="pl-3">Pontos de Atendimento</h3>
+    </div>
+  </div>
+  <div class="unPrincipal flex flex-col justify-center">
+    <form [formGroup]="paForm" class="flex flex-col items-center mt-8 md:mt-14 mx-8">
+      <div class="flex flex-col md:flex-row justify-evenly items-center gap-4 mb-4 w-full">
+        <div class="flex flex-col items-center md:flex-row gap-4">
+          <label for="drpUnidade" class="mr-2">Unidade:</label>
+          <select formControlName="unidade" id="drpUnidade" class="rounded-lg drpUnidadeBox">
+            <option *ngFor="let unidade of allUnidades" [value]="unidade.idunidadeinst">{{ unidade.nomeunidade }}</option>
+          </select>
+        </div>
+        <div class="saldoTotal flex flex-col items-center md:items-start">
+          <h4 class="text-sm font-bold">Saldo Total:</h4>
+          <p>R$ {{ saldoTotal | number:'1.2-2' }}</p>
+        </div>
+        <div class="dataAtualizacao flex flex-col items-center md:items-end">
+          <h4 class="text-sm font-bold">Última Atualização:</h4>
+          <p>{{ dataAtualizacao | date:'dd/MM/yyyy \'às\' HH:mm:ss' }}</p>
+        </div>
+        <div class="flex justify-center content-center items-center py-3 btExportar">
+          <img [src]="currentImgExportar" alt="Botão de Exportar" class="btn-exportar cursor-pointer"
+            (mouseenter)="alterarImgExportar(true)" (mouseleave)="alterarImgExportar(false)" (click)="exportarExcel()">
+        </div>
+      </div>
+      <hr class="w-full my-4 border-t border-gray-300 custom-hr">
+    </form>
+    <h6 class="terminalLabelTitle text-center font-bold mt-2">TERMINAIS</h6>
+    <div class="terminais-container flex justify-center">
+      <div class="terminais m-4 md:flex md:flex-col md:justify-center md:gap-4 md:w-8/12">
+        <div *ngIf="terminais.length > 0; else noTerminais" class="flex flex-col gap-4">
+          <div *ngFor="let tipo of tiposTerminais" class="flex flex-col gap-4">
+            <h4 class="font-bold mt-4">{{ tipo }}</h4>
+            <div *ngFor="let terminal of getTerminaisByTipo(tipo)" class="atmUser flex flex-col">
+              <div class="atmUserContent flex flex-col md:flex-row justify-between p-4 gap-4">
+                <div class="terminal flex flex-col gap-4">
+                  <p>Terminal:</p>
+                  <p class="font-bold">{{ terminal.numTerminal }}</p>
+                </div>
+                <div class="terminalUsuario flex flex-col gap-4">
+                  <p>Usuário:</p>
+                  <p class="font-bold">{{ terminal.usuario }}</p>
+                </div>
+                <div class="terminalSaldo flex flex-col gap-4">
+                  <p>Saldo:</p>
+                  <div class="saldoT flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" 
+                      [ngStyle]="{'fill': getSaldoCor(terminal.saldo, terminal.limiteMin, terminal.limiteMax)}">
+                      <ellipse cx="7.64331" cy="6" rx="7.64331" ry="6"/>
+                    </svg>
+                    <p class="font-bold">R$ {{ terminal.saldo | number:'1.2-2' }}</p>
+                  </div>
+                </div>
+                <div class="terminalLimite flex flex-col gap-4">
+                  <p>Limite Superior: <span class="font-bold">R$ {{ terminal.limiteMax | number:'1.2-2' }}</span></p>
+                  <p>Limite Inferior: <span class="font-bold">R$ {{ terminal.limiteMin | number:'1.2-2' }}</span></p>
+                </div>
+                <div class="terminalGrafico flex flex-col gap-4">
+                  <p>Gráfico:</p>
+                  <img [src]="currentImgGrafico" alt="Botão de Gráfico" class="btn-grafico cursor-pointer" (click)="toggleGrafico(terminal.numTerminal)">
+                </div>
+              </div>
+              <div *ngIf="isGraficoVisible(terminal.numTerminal)" class="grafico-container m-2 flex flex-col">
+                <div class="filtrosGrafico flex flex-col md:flex-row justify-around items-center">
+                  <div class="dtInicio">
+                    <label for="dataInicio" class="mr-2">Data Início:</label>
+                    <input id="dataInicio" type="date" [(ngModel)]="filtroDataInicio">
+                  </div>
+                  <div class="dtFinal">
+                    <label for="dataFim" class="mr-2">Data Fim:</label>
+                    <input id="dataFim" type="date" [(ngModel)]="filtroDataFim" (keydown.enter)="carregarGrafico(terminal.numTerminal)">
+                  </div>
+                  <button class="btn-filtrarGrafico py-2 px-4 mt-2 md:mt-0" (click)="carregarGrafico(terminal.numTerminal)">Filtrar</button>
+                  <button class="btn-exportarGrafico py-2 px-4 mt-2 md:mt-0 md:ml-2" (click)="exportarGrafico(terminal.numTerminal)">Exportar</button>
+                </div>
+                <!--Gráfico renderizado-->
+                <div class="graficoRenderizado">
+                  <canvas id="grafico-{{terminal.numTerminal}}" class="grafico"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noTerminais>
+          <div class="text-center text-red-500 font-bold mt-4">
+            Unidade sem Terminais disponíveis para consulta!
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
